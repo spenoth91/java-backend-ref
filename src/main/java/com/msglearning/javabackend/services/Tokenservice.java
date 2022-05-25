@@ -11,6 +11,8 @@ import java.util.Date;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class Tokenservice {
 
@@ -100,6 +102,14 @@ public class Tokenservice {
         toLog.append("Role: " + claimsBody.get(ROLE) + separator);
         toLog.append("Expiration: " + claimsBody.getExpiration() + separator);
         LOG.debug(toLog.toString());
+    }
+
+    public String resolveToken(final String bearerToken) {
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            String token = bearerToken.substring(7);
+            return getUserName(token);
+        }
+        return null;
     }
 
 }

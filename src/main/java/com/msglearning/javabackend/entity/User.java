@@ -1,12 +1,12 @@
 package com.msglearning.javabackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @Table(name = User.TABLE_NAME)
@@ -43,5 +43,8 @@ public class User {
 
     @Column
     private String occupation;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Stuff> stuffList;
 
 }

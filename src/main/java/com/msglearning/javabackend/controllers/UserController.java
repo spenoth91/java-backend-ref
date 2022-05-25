@@ -2,7 +2,10 @@ package com.msglearning.javabackend.controllers;
 
 import com.msglearning.javabackend.entity.User;
 import com.msglearning.javabackend.services.ImageService;
+import com.msglearning.javabackend.services.StuffService;
+import com.msglearning.javabackend.services.Tokenservice;
 import com.msglearning.javabackend.services.UserService;
+import com.msglearning.javabackend.to.StuffTO;
 import com.msglearning.javabackend.to.UserTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,17 @@ public class UserController {
     private static final String EMAIL_PATH = "/email/{email}";
     private static final String NAME_PATH = "/name/{name}";
     private static final String PROFILE_IMAGE = "/image/{id}";
+    private static final String STUFF_PATH = "/stuff";
+
 
     @Autowired
     UserService userService;
 
+    @Autowired
+    Tokenservice tokenService;
+
+    @Autowired
+    StuffService stuffService;
 
     @Autowired
     private Environment env;
@@ -65,4 +75,15 @@ public class UserController {
         String profileImageStoragePlace = env.getProperty("profileimage.path");
         return imageService.read(profileImageStoragePlace +"\\"+imageNameOpt.get());
     }
+
+    @GetMapping(STUFF_PATH)
+    public List<StuffTO> getMyStuff(@RequestHeader("Authorization") String bearerToken) {
+
+        String userName = tokenService.resolveToken(bearerToken);
+
+        Long userId = userService.findByEmail(userName).get().getId();
+
+        return stuffService.findByOwner(userId);
+    }
+
 }

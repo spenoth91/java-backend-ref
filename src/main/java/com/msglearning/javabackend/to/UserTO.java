@@ -22,4 +22,17 @@ public class UserTO implements Serializable {
     private String phone;
 
     private String occupation;
+
+    @Override
+    public String toString() {
+        return "UserTO{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", occupation='" + occupation + '\'' +
+                '}';
+    }
 }

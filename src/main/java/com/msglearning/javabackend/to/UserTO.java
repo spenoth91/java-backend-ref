@@ -2,16 +2,16 @@ package com.msglearning.javabackend.to;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserTO implements Serializable {
 
     private Long id;
-
-    private String password;
 
     private String firstName;
 
@@ -27,7 +27,6 @@ public class UserTO implements Serializable {
     public String toString() {
         return "UserTO{" +
                 "id=" + id +
-                ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

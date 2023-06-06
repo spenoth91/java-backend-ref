@@ -4,6 +4,7 @@ import com.msglearning.javabackend.entity.User;
 import com.msglearning.javabackend.services.PasswordService;
 import com.msglearning.javabackend.services.Tokenservice;
 import com.msglearning.javabackend.services.UserService;
+import com.msglearning.javabackend.to.UserCTO;
 import com.msglearning.javabackend.to.UserTO;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class AuthController {
     Tokenservice tokenService;
 
     @PostMapping(REGISTER_PATH)
-    public boolean register(@RequestBody UserTO userTO) {
+    public boolean register(@RequestBody UserCTO userTO) {
 
         try {
             userService.save(userTO);

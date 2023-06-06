@@ -17,6 +17,18 @@ public class User {
 
     static final String TABLE_NAME = "user";
 
+
+    public User(Long id, String firstName, String lastName, String email, String phone, String profileImage, String occupation, List<Stuff> stuffList) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.profileImage = profileImage;
+        this.occupation = occupation;
+        this.stuffList = stuffList;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
